@@ -20,12 +20,7 @@ class App extends Component {
   };
 
   handleFindContactsFromInput = data => {
-    const { contacts } = this.state;
     this.setState({ filter: data });
-    const result = contacts.find(el =>
-      el.name.toLowerCase().includes(data.toLowerCase()),
-    );
-    console.log(result);
   };
 
   handleDeleteContact = e => {
@@ -38,6 +33,13 @@ class App extends Component {
   };
 
   render() {
+    const { contacts, filter } = this.state;
+    const normalizedFilter = filter.toLowerCase();
+
+    const visibleContacts = contacts.filter(el =>
+      el.name.toLowerCase().includes(normalizedFilter),
+    );
+
     return (
       <div className={s.container}>
         <h1>Phonebook</h1>
@@ -46,7 +48,7 @@ class App extends Component {
         <h2>Contacts</h2>
         <Filter onFilter={this.handleFindContactsFromInput} />
         <ContactList
-          items={this.state.contacts}
+          items={visibleContacts}
           onDeleteContact={this.handleDeleteContact}
         />
       </div>

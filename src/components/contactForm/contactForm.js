@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 
+import s from './ContactForm.module.css';
+
 class ContactForm extends Component {
   static propTypes = {};
 
@@ -28,14 +30,16 @@ class ContactForm extends Component {
 
     if (contacts.find(item => item.name === name)) {
       alert(`${name} is already is contact`);
+      return;
     } else {
       this.setState({
         contacts: [...contacts, contactItem],
       });
-
-      this.props.onSubmitForm([...contacts, contactItem]);
-      this.resetInput();
     }
+
+    this.props.onSubmitForm([...contacts, contactItem]);
+
+    this.resetInput();
   };
 
   resetInput = () => {
@@ -48,10 +52,11 @@ class ContactForm extends Component {
   render() {
     const { name, number } = this.state;
     return (
-      <form onSubmit={this.handleSubmitForm}>
-        <label>
+      <form onSubmit={this.handleSubmitForm} className={s.form}>
+        <label className={s.lable}>
           Name
           <input
+            className={s.input}
             type="text"
             name="name"
             value={name}
@@ -59,16 +64,19 @@ class ContactForm extends Component {
           ></input>
         </label>
 
-        <label>
+        <label className={s.lable}>
           Number
           <input
+            className={s.input}
             type="tel"
             name="number"
             value={number}
             onChange={this.handleInputName}
           ></input>
         </label>
-        <button type="submit">Add contact</button>
+        <button className={s.button} type="submit">
+          Add contact
+        </button>
       </form>
     );
   }

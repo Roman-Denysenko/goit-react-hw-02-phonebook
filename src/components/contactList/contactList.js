@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import s from './ContactList.module.css';
+
 const ContactList = ({ items, onDeleteContact }) => {
   if (items.length === 0) {
     return null;
@@ -11,9 +13,14 @@ const ContactList = ({ items, onDeleteContact }) => {
       return null;
     }
     return (
-      <li key={id}>
-        {name}: {number}{' '}
-        <button type="button" id={id} onClick={onDeleteContact}>
+      <li key={id} className={s.item}>
+        {name}: {number}
+        <button
+          className={s.button}
+          type="button"
+          id={id}
+          onClick={onDeleteContact}
+        >
           Delete
         </button>{' '}
       </li>
@@ -27,6 +34,7 @@ ContactList.propTypes = {
   name: PropTypes.string,
   id: PropTypes.string,
   number: PropTypes.string,
+  onDeleteContact: PropTypes.func,
 };
 
 export default ContactList;
