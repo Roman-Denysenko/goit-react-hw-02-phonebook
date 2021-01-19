@@ -17,6 +17,7 @@ class ContactForm extends Component {
   handleInputName = e => {
     const { name, value } = e.target;
     this.setState({ [name]: value });
+    this.handleDeleteContactFromFormState();
   };
 
   handleSubmitForm = e => {
@@ -38,8 +39,12 @@ class ContactForm extends Component {
     }
 
     this.props.onSubmitForm([...contacts, contactItem]);
-
     this.resetInput();
+  };
+
+  handleDeleteContactFromFormState = () => {
+    const newContactsFromAppState = this.props.UpdateContacts;
+    this.setState({ contacts: newContactsFromAppState });
   };
 
   resetInput = () => {

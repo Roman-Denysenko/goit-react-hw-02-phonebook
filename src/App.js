@@ -43,7 +43,10 @@ class App extends Component {
     return (
       <div className={s.container}>
         <h1>Phonebook</h1>
-        <ContactForm onSubmitForm={this.handleTakeSubmitForm} />
+        <ContactForm
+          onSubmitForm={this.handleTakeSubmitForm}
+          UpdateContacts={contacts}
+        />
 
         <h2>Contacts</h2>
         <Filter onFilter={this.handleFindContactsFromInput} />
